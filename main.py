@@ -27,11 +27,6 @@ app = Flask(__name__)
 #    return 'Hello World!'
 
 def imc():
-    #Aqui es donde obtenemos la cantidad de personas
-    personas = int(input( "personas: "))
-
-    #Aqui verificamos que la cantidad sea mayor a 0 si no, no tiene sentido pedir nada
-    while personas > 0:
     #Le pedimos el nombre y lo guardamos en un input (Si usara Python 2.7 seria raw_input y no input pero usa python 3.7)
     n = input("Su nombre por favor: ")
     #Se pide al edad que siempre es un entero por eso el int() 
@@ -71,9 +66,6 @@ def imc():
     elif IMC >= 40.00:
         return ("obesidad morbida")
 
-    #Por cada persona a la que le pedimos los datos debemos restarle una (Porque ya la recorrimos)
-    #si no el ciclo se vuelve infinito
-    personas = personas - 1
 
 @app.errorhandler(500)
 def server_error(e):

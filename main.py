@@ -1,3 +1,5 @@
+
+
 # Copyright 2015 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,17 +17,17 @@
 # [START gae_flex_quickstart]
 import logging
 
-#from flask import Flask
+from flask import Flask
 
 
-#app = Flask(__name__)
+app = Flask(__name__)
 
 
-#@app.route('/')
-#def hello():
-#    """Return a friendly HTTP greeting."""
-#    return 'Hello World!'
-
+@app.route('/')
+def hello():
+    """Return a friendly HTTP greeting."""
+    return 'Hello World!'
+@app.route('/imc')
 def imc():
 	#Le pedimos el nombre y lo guardamos en un input (Si usara Python 2.7 seria raw_input y no input pero usa python 3.7)
 	n = input("Su nombre por favor: ")
@@ -82,7 +84,6 @@ def server_error(e):
 if __name__ == '__main__':
 	# This is used when running locally. Gunicorn is used to run the
 	# application on Google App Engine. See entrypoint in app.yaml.
-	#app.run(host='127.0.0.1', port=8080, debug=True)
-	imc()
-# [END gae_flex_quickstart]
+	app.run(host='127.0.0.1', port=8080, debug=True)
 
+# [END gae_flex_quickstart]

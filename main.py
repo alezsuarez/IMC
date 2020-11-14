@@ -1,5 +1,3 @@
-
-
 # Copyright 2015 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,51 +21,52 @@ from flask import Flask
 app = Flask(__name__)
 
 
-
 @app.route('/')
-def imc():
+def hello():
+    """Return a friendly HTTP greeting."""
+    return 'Hello World!'
+@app.route('/imc/<edad>/<altura>/<peso>', methods=['GET'])
+def imc(edad, altura, peso):
 	#Le pedimos el nombre y lo guardamos en un input (Si usara Python 2.7 seria raw_input y no input pero usa python 3.7)
-	n = input("Su nombre por favor: ")
+	#n = input("Su nombre por favor: ")
 	#Se pide al edad que siempre es un entero por eso el int() 
-	e = int(input("Su edad en años por favor: "))
+	#e = int(input("Su edad en años por favor: "))
 	#como la altura es en metros y no centimetros hay que ponerle punto y por ende es un flotante float()
-	a = float(input ("Su altura en metros por favor: "))
+	#a = float(input ("Su altura en metros por favor: "))
 	#Aqui se duplica codigo pero bueno... decimos que est (de estatura) es igual a altura (No me diga)
-	est = a
+	#est = a
 	#La masa en kilogramos si puede tener decimales asi que la dejamos flotante
-	m = float (input("Su masa en kilogramos por favor :"))
+	#m = float (input("Su masa en kilogramos por favor :"))
 	#Calculo del IMC, masa (En kilogramos) entre la estatura (En metros) elevada al cuadrado
-	IMC = m / est**2
+	IMC = float(float(peso) / float(altura)**2)
+	respuesta =""
 	#Le decimos si es menor o mayor de edad, si es menor a 18 es menor, si no es mayor edad
 	#Solo ruegue porque a nadie se le ocurra meter numeros negativos, le va a decir que es menor de edad
-	if(e < 18):
-		print("Usted es menor de edad")
+	if(int(edad) < 18):
+		respuesta+=("Usted es menor de edad\n")
 	else:
-		print("Usted es mayor de edad")
+		respuesta+=("Usted es mayor de edad\n")
 	#Le imprimos el IMC para que se ponga sad
-	print("IMC: " + str(IMC) )
+	respuesta += ("IMC: " + str(IMC) + "\n" )
 
 	#Hacemos las distintas validaciones
 	if IMC >= 0 and IMC <= 15.99 :
-		return ("Delgadez severa")
+		respuesta+= ("Delgadez severa")
 	elif IMC >= 16.00 and IMC <= 16.99 :
-		return ("Delgadez moderada")
+		respuesta+= ("Delgadez moderada")
 	elif IMC >= 17.00 and IMC <= 18.49:
 		return ("Delgadez leve")
 	elif IMC >= 18.50 and IMC <= 24.99 :
-		return ("Normal")
+		respuesta+= ("Normal")
 	elif IMC >= 25.00 and IMC <= 29.99:
-		return ("Sobrepeso")
+		respuesta+= ("Sobrepeso")
 	elif IMC >= 30.00 and IMC <= 34.99:
-		return ("obesidad leve")
+		respuesta+= ("obesidad leve")
 	elif IMC >= 35.00 and IMC <= 39.00:
-		return ("obesidad media")
+		respuesta+= ("obesidad media")
 	elif IMC >= 40.00:
-		return ("obesidad morbida")
-
-	#Por cada persona a la que le pedimos los datos debemos restarle una (Porque ya la recorrimos)
-	#si no el ciclo se vuelve infinito
-	personas = personas - 1
+		respuesta+= ("obesidad morbida")
+	return respuesta
 
 #@app.errorhandler(500)
 def server_error(e):

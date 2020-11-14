@@ -23,11 +23,8 @@ from flask import Flask
 app = Flask(__name__)
 
 
+
 @app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
-@app.route('/imc')
 def imc():
 	#Le pedimos el nombre y lo guardamos en un input (Si usara Python 2.7 seria raw_input y no input pero usa python 3.7)
 	n = input("Su nombre por favor: ")
